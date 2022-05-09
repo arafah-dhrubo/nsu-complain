@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% block title %}
+    Send Complain
+{% endblock %}
+{% block content %}
+    <div class="container my-5">
+        <div class="mb-5 bg-light px-2 py-1 rounded d-flex justify-content-between align-items-center">
+            <h6 class="fw-light m-0"><i class="fa-solid fa-paper-plane"></i> Send Complain</h6>
+            <a href="/" class="btn btn-dark btn-sm">Back</a>
+        </div>
+        <div class="card mx-auto my-5" style="width: 28rem">
+            <div class="card-body">
+                <h1>Complain Here</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Your name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Your Phone Number</label>
+                        <input type="text" class="form-control" id="phone" name="phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Your Message</label>
+                        <textarea class="form-control" id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100 d-flex align-items-center" onclick="showSpinner()">
+                        <span class=" w-75 mx-auto">Submit Complain</span>
+                        <span class="spinner-border spinner-border-sm fs-6 text-end" role="status" id="loading-display" style="visibility:hidden;">
+                            <span class="visually-hidden">Loading...</span>
+                        </span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

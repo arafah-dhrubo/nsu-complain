@@ -1,0 +1,70 @@
+{% if user.is_authenticated and not user.profile.is_verified and not user.first_name%}
+    <div class="bg-dark d-flex justify-content-around py-2 align-items-center">
+        <p class="text-white m-0">Please verify your account</p>
+        <a href="{% url 'resend_email' %}" class="btn btn-sm bg-white">Resend Email</a>
+    </div>
+{% endif %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <div class="d-flex flex-column justify-content-center text-center w-50">
+                <div class="">
+                    <svg class=" w-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                        <path d="M415.44 512h-95.11L212.12 357.46v91.1L125.69 512H28V29.82L68.47 0h108.05l123.74 176.13V63.45L386.69 0h97.69v461.5zM38.77 35.27V496l72-52.88V194l215.5 307.64h84.79l52.35-38.17h-78.27L69 13zm82.54 466.61l80-58.78v-101l-79.76-114.4v220.94L49 501.89h72.34zM80.63 10.77l310.6 442.57h82.37V10.77h-79.75v317.56L170.91 10.77zM311 191.65l72 102.81V15.93l-72 53v122.72z"/>
+                    </svg>
+                </div>
+                <small class="fs-6">NSU Complain</small>
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'send_complain' %}">Send Complain</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'all_complains' %}">My Complains</a>
+                </li>
+            </ul>
+            <div class="ms-auto">
+                {% if user.is_authenticated %}
+
+                    <div class="dropdown">
+                        <a class="btn btn-outline-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i> {{ user.username }}
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            {% if not user.profile.photo %}
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'settings' %}">
+                                        <i class="fas fa-cog"></i>
+                                        Settings
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a class="dropdown-item" href="{% url 'logout' %}">
+                                    <i
+                                            class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a class="text-decoration-none bg-dark text-white btn btn-sm" href="{% url 'login' %}"><i
+                            class="fa-solid fa-arrow-right-from-bracket"></i> Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</nav>

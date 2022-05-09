@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% block title %}
+    Complain
+{% endblock %}
+{% block content %}
+    <div class="container my-5">
+        <div class="mb-5 bg-light px-2 py-1 rounded d-flex justify-content-between align-items-center">
+            <h6 class="fw-light m-0"><i class="fa-solid fa-paper-plane"></i> Single Complain</h6>
+            <a href="/" class="btn btn-dark btn-sm">Back</a>
+        </div>
+        <div>
+            <div class="d-flex gap-5 border">
+                <div class="col-3 bg-light ">
+                    <div class="text-center py-4"><i class="fa-solid fa-envelope-circle-check  fs-1"></i></div>
+                </div>
+                <div class="col-9">
+                    <div class="fs-3 py-4">Complain Detail</div>
+                </div>
+            </div>
+            <div class="w-100 mt-2">
+                <div class="border py-3 px-2 d-flex gap-5">
+                    <div class="col-3"><i class="fa-solid fa-at"></i> Receiver</div>
+                    <div class="col-9">{{ data.mail }}</div>
+                </div>
+                <div class="border py-3 px-2 d-flex gap-5">
+                    <div class="col-3"><i class="fa-solid fa-clock"></i> Date Send</div>
+                    <div class="col-9">{{ data.date_created }}</div>
+                </div>
+                <div class="border py-3 px-2 d-flex gap-5">
+                    <div class="col-3"><i class="fa-solid fa-phone"></i> Phone no.</div>
+                    <div class="col-9">{{ data.phone }}</div>
+                </div>
+                <div class="border py-3 px-2 d-flex gap-5">
+                    <div class="col-3"><i class="fa-solid fa-file-lines"></i> Message</div>
+                    <div class="col-9">{{ data.message }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

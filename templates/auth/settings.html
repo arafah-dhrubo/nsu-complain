@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+{% block title %}
+    Settings
+{% endblock %}
+{% block content %}
+    <div class="container my-5">
+        <div class="mb-5 bg-light px-2 py-1 rounded d-flex justify-content-between align-items-center">
+            <h6 class="fw-light m-0"><i class="fa-solid fa-gear"></i> Settings>All Social Logins</h6>
+            <a href="/" class="btn btn-dark btn-sm">Back</a>
+        </div>
+
+        <div class="d-flex gap-2">
+            {% if github_login %}
+                <div class="border rounded-3 p-5">
+                    <i class="fa-brands fa-github fs-1 mx-auto w-100"></i>
+                    <h6 class="text-center">Connected as <a
+                            href="https://github.com/{{ github_login.extra_data.login }}/"
+                            target="_blank">{{ github_login.extra_data.login }}</a></h6>
+                    {% if can_disconnect %}
+                        <form method="post" action="{% url 'social:disconnect' 'github' %}" class="text-center">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Disconnect from GitHub</button>
+                        </form>
+                    {% else %}
+                        <div class=" text-center">
+                        <button type="button" class="btn btn-sm border border-2 " disabled>Disconnect from GitHub
+                        </button>
+                        </div>
+                        <br/>
+                        <p style="color: red;" class="text-center">You must <a href="{% url 'password' %}">
+                            define a password</a> <br/>
+                            before disconnecting from Github.</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+         {% if google_login %}
+                <div class="border rounded-3 p-5">
+                    <i class="fa-brands fa-google fs-1 mx-auto w-100"></i>
+                    <h6 class="text-center">Connected as <a
+                            href="https://google.com/{{ google_login.extra_data.login }}/"
+                            target="_blank">{{ google_login.extra_data.login }}</a></h6>
+                    {% if can_disconnect %}
+                        <form method="post" action="{% url 'social:disconnect' 'google-oauth2' %}" class="text-center">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Disconnect from Google</button>
+                        </form>
+                    {% else %}
+                        <div class=" text-center">
+                        <button type="button" class="btn btn-sm border border-2 " disabled>Disconnect from Google
+                        </button>
+                        </div>
+                        <br/>
+                        <p style="color: red;" class="text-center">You must <a href="{% url 'password' %}">
+                            define a password</a> <br/>
+                            before disconnecting from Google.</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
